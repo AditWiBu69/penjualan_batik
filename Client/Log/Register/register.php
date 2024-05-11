@@ -20,7 +20,7 @@
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form action="../../../Server/Config/Log/Login/index.php" method="post">
+          <form action="../../../Server/Config/Log/Register/index.php" method="post">
           
 
             <div class="divider d-flex align-items-center my-4">
@@ -42,7 +42,7 @@
              <!-- Confirm Password input -->
              <div data-mdb-input-init class="form-outline mb-3">
               <label class="form-label" for="form3Example4">Confirm Password</label>
-              <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter confirm password" name="password"/>
+              <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter confirm password" name="confirm"/>
             </div>
 
            
