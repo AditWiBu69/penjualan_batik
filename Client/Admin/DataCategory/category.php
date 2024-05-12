@@ -1,3 +1,10 @@
+<?php 
+    require "../../../Server/Config/Read/categoryRead.php";
+
+    $categories = query("SELECT * FROM categories");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,26 +52,19 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
+                                        <?php $i = 1 ?>
+                                        <?php foreach ($categories as $category ) : ?>
                                         <tr>
-                                            <td> 1</td>
-                                            <td>Batik Nusantara</td>
+                                            <td><?= $i; ?></td>
+                                            <td><?= $category['category']; ?></td>
                                             <td>
-                                            <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href = 'edit.php';">Edit</button>
+                                            <a href="edit.php?id=<?= $category['id_category']; ?>" class="btn btn-warning btn-sm">Edit</a>
                                             <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                             </td>
                                         </tr>
-                                      
+                                      <?php $i++ ?>
+                                      <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

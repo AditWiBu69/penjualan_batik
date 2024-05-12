@@ -1,3 +1,11 @@
+<?php
+require "../../../Server/Config/Read/categoryRead.php";
+$id = $_GET['id'];
+
+$category = query("SELECT * FROM categories WHERE id_category = $id")[0];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,17 +35,18 @@
                     <h1 class="mt-4">Edit Data Category</h1>
                     <hr>
                     <br>
+                    <form action="../../../Server/Config/Update/updateCategory.php" method="post">
+                        <input type="hidden" value="<?= $category['id_category']; ?>" name="id">
+                        <div class="mb-3">
+                            <label for="category_name" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="category_name" name="category" value="<?= $category['category']; ?>">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="category_name" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="category_name">
-                    </div>
-                    
-                    <hr>
+                        <hr>
 
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href = 'category.php';">Back</button>
-                    <button type="button" class="btn btn-success">Submit</button>
-
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href = 'category.php';">Back</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
                 </div>
             </main>
 

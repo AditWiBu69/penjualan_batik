@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (isset($_SESSION["customer"])) {
-    header("Location: ../../../../Client/Customer/customer.php");
-} elseif (isset($_SESSION["admin"])) {
-    header("Location: ../../../../Client/Admin/admin.php");
-}
 // Koneksi ke database
 require '../../index.php';
 
@@ -22,7 +17,7 @@ function login($username, $password)
     $query = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($conn, $query);
 
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) === 1) {
         $user = mysqli_fetch_assoc($result);
         $verif = password_verify($password, $user["password"]);
         if ($verif) {
@@ -44,8 +39,9 @@ function login($username, $password)
             exit;
         }
     } else {
-        echo "<script>
+        echo "  <script>
                     alert('Wrong Username or Password')
+                    window.location.href = '../../../../Client/Log/Login/'
                 </script>";
     }
 }

@@ -28,16 +28,17 @@
                     <hr>
                     <br>
 
-                    <div class="mb-3">
-                        <label for="category_name" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="category_name" placeholder="Input Category Name">
-                    </div>
-                    
-                    <hr>
+                    <form action="../../../Server/Config/Create/categoryCreate.php" method="post">
+                        <div class="mb-3">
+                            <label for="category_name" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="category_name" placeholder="Input Category Name" name="category">
+                        </div>
 
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href = 'category.php';">Back</button>
-                    <button type="button" class="btn btn-success">Submit</button>
+                        <hr>
 
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href = 'category.php';">Back</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
                 </div>
             </main>
 

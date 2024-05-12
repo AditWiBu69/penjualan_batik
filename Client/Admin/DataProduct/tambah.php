@@ -1,3 +1,10 @@
+<?php
+session_start();
+require '../../../Server/Config/Read/categoryRead.php';
+
+$category = query('SELECT * FROM categories');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,35 +35,46 @@
                     <hr>
                     <br>
 
-                    <div class="mb-3">
-                        <label for="product_name" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="product_name" placeholder="Input Product Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="size" class="form-label">Size</label>
-                        <input type="text" class="form-control" id="size" placeholder="Input Size">
-                    </div>
-                    <div class="mb-3">
-                        <label for="stock" class="form-label">Stock</label>
-                        <input type="text" class="form-control" id="size" placeholder="Input Stock">
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="price" placeholder="Input Price">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Images</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
-                    <hr>
+                    <form action="../../../Server/Config/Create/productCreate.php" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="product_name" placeholder="Input Product Name" name="product_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category">
+                                <option selected>Choose...</option>
+                                <?php foreach ($category as $c) : ?>
+                                    <option value="<?= $c['id_category']; ?>"><?= $c['category']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="size" class="form-label">Size</label>
+                            <input type="text" class="form-control" id="size" placeholder="Input Size" name="size">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="text" class="form-control" id="size" placeholder="Input Stock" name="stock">
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="price" placeholder="Input Price" name="price">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Images</label>
+                            <input class="form-control" type="file" id="formFile" name="photo">
+                        </div>
 
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';">Back</button>
-                    <button type="button" class="btn btn-success">Submit</button>
+                        <hr>
 
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';">Back</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
                 </div>
             </main>
 
