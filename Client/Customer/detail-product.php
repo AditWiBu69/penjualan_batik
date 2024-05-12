@@ -43,15 +43,31 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-5">
-                <br>
-                <!-- <button type="button" class="btn btn-success" onclick="window.location.href = 'tambah.php';">Add Data</button> -->
-                
-                <div class="card mb-4">
-                    <h2 class="mt-3 text-center"><i class="fa-solid fa-list"></i> Details Products</h2>
+
+                    <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Products</h2>
+                    <hr>
+                    
+                    <div class="card">
                     <br>
-                   
-                   
+                    <img src="../Assets/img/portfolio/portfolio-9.jpg" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
+                    <div class="card-body">
+                        <h4><b class="card-title">Nama Product</b></h4>
+                        <h5 class="card-title">Description:</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quaerat veniam tempora sit dignissimos illum impedit eveniet nulla nobis recusandae quam totam quisquam architecto cumque odit corporis praesentium cupiditate ullam et, quibusdam a mollitia. Quaerat ipsum at sint ducimus tempora repellat, saepe consectetur adipisci dignissimos amet delectus, maxime, enim nemo?</p>
+                        <h5 class="card-title">Size:</h5>
+                        <p class="card-text">39</p>
+                        <h5 class="card-title">Stock:</h5>
+                        <p class="card-text">9</p>
+                        <h5 class="card-title">Price:</h5>
+                        <p class="card-text">Rp. 100.000</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
                 </div>
+
+                <br>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
+<br><br>
+
             </div>
     </div>
     </main>

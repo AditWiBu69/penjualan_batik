@@ -28,8 +28,6 @@
                             <li class="breadcrumb-item active">Data</li>
                         </ol>
 
-                        <button type="button" class="btn btn-success" onclick="window.location.href = 'tambah.php';">Add Data</button>
-                        <br><br>
                         
                         <div class="card mb-4">
                             <div class="card-header">
