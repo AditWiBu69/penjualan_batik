@@ -61,18 +61,54 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                     <div class="row d-flex justify-content-center align-items-center">
                         <?php foreach ($products as $product) : ?>
                             <div class="col-md-3 mb-3">
-                                <div class="card" style="width: 15rem;">
+                                <div class="card" style="width: 18rem;">
                                     <img src="../Assets/img/product/<?= $product['photo']; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h4 class="card-text"><?= $product['product_name']; ?></h4>
                                         <b class="card-text">Description:</b>
                                         <p><?= $product['description']; ?></p>
-                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-backward"></i></button>
+                            <button type="button" class="btn btn-success btn-sm" onclick="window.location.href = '#';">Buy <i class="fa-solid fa-cart-shopping"></i></a>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
+                    <!-- <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Daftar Products
+                    </div> -->
+                    <!-- <table class="table table-sm table-bordered border-dark card-header text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Id Product</th>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Size</th>
+                                <th>Stock</th>
+                                <th>Price</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-striped table-hover">
+                            <tr class="">
+                                <td> 1</td>
+                                <td> </td>
+                                <td>Batik</td>
+                                <td>Bagus cuy</td>
+                                <td>39</td>
+                                <td>10</td>
+                                <td>Rp. 500.000</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm" onclick="window.location.href = 'edit.php';">Buy</button>
+                                </td>
+                            </tr>
+                        
+
+                        </tbody>
+                    </table> -->
+
                 </div>
             </div>
         </main>
