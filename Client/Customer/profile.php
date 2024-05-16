@@ -65,8 +65,8 @@
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <hr>
-        <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
         <button type="button" class="btn btn-secondary" onclick="window.location.href = 'customer.php';"><i class="fa-solid fa-backward"></i> Back</button>
+        <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
     </main>
   </div>
 

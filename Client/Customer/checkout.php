@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-require '../../Server/Config/Read/productRead.php';
-
-$products = query('SELECT id_product,product_name,description,photo FROM products');
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,41 +39,47 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
     <!-- NAVBAR -->
     <?php include 'Partials/navbar.php'; ?>
 
-    <br><br><br><br>
+    <br><br><br>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-5">
-                <h2 class="mt-3 text-center"><i class="fa-solid fa-list"></i> Daftar Products</h2>
-                <hr>
-                <br>
-                <!-- <button type="button" class="btn btn-success" onclick="window.location.href = 'tambah.php';">Add Data</button> -->
+            <form action="" class="row g-3">
+                <div class="container-fluid px-5">
+                    <h2 class="mt-3 text-center"><i class="fa-solid fa-bag-shopping"></i> Checkout</h2>
+                    <hr>
+                    <div class="row w-100 d-flex justify-content-center align-items-center" style="padding-left: 2em;">
 
-                <div class="card p-4">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <?php foreach ($products as $product) : ?>
-                            <div class="col-md-3 mb-3">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="../Assets/img/product/<?= $product['photo']; ?>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h4 class="card-text"><?= $product['product_name']; ?></h4>
-                                        <b class="card-text">Description:</b>
-                                        <p><?= $product['description']; ?></p>
-                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-forward"></i>
-                                        <a href="checkout.php" class="ms-3 btn btn-success btn-sm">Buy <i class="fa-solid fa-cart-shopping"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    
+                        <p>Silahkan transfer pada rekening berikut : 922498xxxx a.n Adit </p>
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Product Name</label>
+                            <input type="text" name="name" class="form-control" id="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="no_telp" class="form-label">Nomor Rekening</label>
+                            <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No rekening">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" id="name">
+                        </div>
 
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <label for="formFile" class="form-label">Bukti Pembayaran</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <div class="">
+                            <br>
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
+                            <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
+                        </div>
+            </form>
+            <br><br>
+            <!-- <hr> -->
         </main>
     </div>
-    </main>
+</div>
+</div>
 
-    </div>
+
 
 
 
