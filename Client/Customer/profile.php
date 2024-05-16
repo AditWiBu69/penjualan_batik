@@ -43,7 +43,7 @@
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid px-5">
-        <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i> Profile</h2>
+        <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i>  Profile</h2>
         <hr>
 
         <div class="mb-3">
