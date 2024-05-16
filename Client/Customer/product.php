@@ -67,8 +67,8 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                                         <h4 class="card-text"><?= $product['product_name']; ?></h4>
                                         <b class="card-text">Description:</b>
                                         <p><?= $product['description']; ?></p>
-                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-backward"></i></button>
-                            <button type="button" class="btn btn-success btn-sm" onclick="window.location.href = '#';">Buy <i class="fa-solid fa-cart-shopping"></i></a>
+                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-forward"></i>
+                                        <a href="" class="ms-3 btn btn-success btn-sm">Buy <i class="fa-solid fa-cart-shopping"></i></a>
                                     </div>
                                 </div>
                             </div>

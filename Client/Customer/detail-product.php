@@ -1,3 +1,11 @@
+<?php
+
+require '../../Server/Config/Read/productRead.php';
+$id = $_GET['id'];
+
+$product = query("SELECT a.*,b.category AS category_name FROM products a INNER JOIN categories b ON a.category_id=b.id_category WHERE a.id_product = $id")[0];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,29 +52,31 @@
         <main>
             <div class="container-fluid px-5">
 
-                    <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Products</h2>
-                    <hr>
-                    
-                    <div class="card">
+                <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Products</h2>
+                <hr>
+
+                <div class="card">
                     <br>
-                    <img src="../Assets/img/portfolio/portfolio-9.jpg" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
+                    <img src="../Assets/img/product/<?= $product['photo']; ?>" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
                     <div class="card-body">
-                        <h4><b class="card-title">Nama Product</b></h4>
+                        <h4><b class="card-title"><?= $product['product_name']; ?></b></h4>
                         <h5 class="card-title">Description:</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quaerat veniam tempora sit dignissimos illum impedit eveniet nulla nobis recusandae quam totam quisquam architecto cumque odit corporis praesentium cupiditate ullam et, quibusdam a mollitia. Quaerat ipsum at sint ducimus tempora repellat, saepe consectetur adipisci dignissimos amet delectus, maxime, enim nemo?</p>
+                        <p class="card-text"><?= $product['description']; ?></p>
                         <h5 class="card-title">Size:</h5>
-                        <p class="card-text">39</p>
+                        <p class="card-text"><?= $product['size']; ?></p>
                         <h5 class="card-title">Stock:</h5>
-                        <p class="card-text">9</p>
+                        <p class="card-text"><?= $product['stock']; ?></p>
+                        <h5 class="card-title">Category:</h5>
+                        <p class="card-text"><?= $product['category_name']; ?></p>
                         <h5 class="card-title">Price:</h5>
-                        <p class="card-text">Rp. 100.000</p>
+                        <p class="card-text">Rp. <?= $product['price']; ?></p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
 
                 <br>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
-<br><br>
+                <br><br>
 
             </div>
     </div>
