@@ -6,6 +6,10 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Halaman Customer</title>
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="../Assets/css/dashboard.css" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -32,42 +36,57 @@
 
 <body>
 
-<!-- NAVBAR -->
-<?php include 'Partials/navbar.php'; ?>
+  <!-- NAVBAR -->
+  <?php include 'Partials/navbar.php'; ?>
+
+  <br><br><br><br>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-5">
+        <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i> Profile</h2>
+        <hr>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="name" class="form-control" id="email" placeholder="Email">
+        </div>
+
+        <div class="mb-3">
+          <label for="no_telp" class="form-label">No Telp</label>
+          <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Telp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <hr>
+        <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href = 'customer.php';"><i class="fa-solid fa-backward"></i> Back</button>
+    </main>
+  </div>
+
+  </div>
 
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-          <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-              <img src="../Assets/img/hero-img.png" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 d-flex flex-column justify-content-center">
-              <h1 data-aos="fade-up">Welcome to BatikKu.</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">Aditya Firmansyah</h2>
-              <div data-aos="fade-up" data-aos-delay="600">
-                <div class="text-center text-lg-start">
-                  
-                </div>
-              </div>
-            </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Hero -->
 
 
 
 
-  </main><!-- End #main -->
-
-  <!-- FOOTER -->
 
 
+  <script src="../Assets/js/table.js"></script>
 
- <!-- Vendor JS Files -->
- <script src="../Assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+
+  <!-- Vendor JS Files -->
+  <script src="../Assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../Assets/vendor/aos/aos.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../Assets/vendor/glightbox/js/glightbox.min.js"></script>

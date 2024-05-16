@@ -74,40 +74,7 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <!-- <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        Daftar Products
-                    </div> -->
-                    <!-- <table class="table table-sm table-bordered border-dark card-header text-center">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Id Product</th>
-                                <th>Images</th>
-                                <th>Product Name</th>
-                                <th>Description</th>
-                                <th>Size</th>
-                                <th>Stock</th>
-                                <th>Price</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-striped table-hover">
-                            <tr class="">
-                                <td> 1</td>
-                                <td> </td>
-                                <td>Batik</td>
-                                <td>Bagus cuy</td>
-                                <td>39</td>
-                                <td>10</td>
-                                <td>Rp. 500.000</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-sm" onclick="window.location.href = 'edit.php';">Buy</button>
-                                </td>
-                            </tr>
-                        
-
-                        </tbody>
-                    </table> -->
+                    
 
                 </div>
             </div>
