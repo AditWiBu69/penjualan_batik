@@ -1,11 +1,3 @@
-<?php
-
-require '../../Server/Config/Read/productRead.php';
-$id = $_GET['id'];
-
-$product = query("SELECT a.*,b.category AS category_name FROM products a INNER JOIN categories b ON a.category_id=b.id_category WHERE a.id_product = $id")[0];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,31 +44,24 @@ $product = query("SELECT a.*,b.category AS category_name FROM products a INNER J
         <main>
             <div class="container-fluid px-5">
 
-                <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Products</h2>
+                <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Order History</h2>
                 <hr>
-
-                <div class="card">
-                    <br>
-                    <img src="../Assets/img/product/<?= $product['photo']; ?>" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
-                    <div class="card-body">
-                        <h4><b class="card-title"><?= $product['product_name']; ?></b></h4>
-                        <h5 class="card-title">Description:</h5>
-                        <p class="card-text"><?= $product['description']; ?></p>
-                        <h5 class="card-title">Size:</h5>
-                        <p class="card-text"><?= $product['size']; ?></p>
-                        <h5 class="card-title">Stock:</h5>
-                        <p class="card-text"><?= $product['stock']; ?></p>
-                        <h5 class="card-title">Category:</h5>
-                        <p class="card-text"><?= $product['category_name']; ?></p>
-                        <h5 class="card-title">Price:</h5>
-                        <p class="card-text">Rp. <?= $product['price']; ?></p>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../Assets/img/portfolio/portfolio-2.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Product</h5>
+                                <b>Description:</b>
+                                <p class="card-text text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, aliquid.</p>
+                                <p class="card-text"><small class="text-muted">13 June 2024</small></p>
+                                <button type="button" class="btn btn-primary" onclick="window.location.href = 'detail-history.php';"><i class="fa-solid fa-eye"></i> Details</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <br>
-                <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
-                <br><br>
-
             </div>
     </div>
     </main>

@@ -14,6 +14,7 @@
           <li class="dropdown"><a href="#"><span><i class="fa-solid fa-user"></i></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="profile.php">Profile</a></li>
+              <li><a href="order-history.php">Order History</a></li>
               <li><a href="../../../../penjualan_batik/Server/Config/Log/Logout/index.php">Log out</a></li>
             </ul>
           </li>

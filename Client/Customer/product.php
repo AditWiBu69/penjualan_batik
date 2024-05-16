@@ -59,14 +59,12 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
     <!-- NAVBAR -->
     <?php include 'Partials/navbar.php'; ?>
 
-    <br><br><br><br>
+    <br><br><br>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-5">
                 <h2 class="mt-3 text-center"><i class="fa-solid fa-list"></i> Daftar Products</h2>
-                <hr>
                 <br>
-                <!-- <button type="button" class="btn btn-success" onclick="window.location.href = 'tambah.php';">Add Data</button> -->
 
                 <div class="card p-4">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -79,7 +77,21 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                                         <b class="card-text">Description:</b>
                                         <p><?= $product['description']; ?></p>
 
-                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-forward"></i></a>
+
+                                        <!-- set jumlah -->
+                                        <div class="input-group" style="width: 100px;">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="decreaseButton">-</button>
+                                            </div>
+                                            <input type="text" class="form-control text-center thick-border" id="productQuantity" value="1" readonly>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="increaseButton">+</button>
+                                            </div>
+                                        </div>
+                                        <!-- set jumlah end  -->
+
+                                        <br>
+                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-eye"></i></a>
 
                                         <?php if (empty($profile)) : ?>
                                             <a href="#" class="ms-3 btn btn-success btn-sm" onclick="return alert('Fill in your bio first')">Buy <i class="fa-solid fa-cart-shopping"></i></a>
@@ -91,8 +103,6 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                             </div>
                         <?php endforeach; ?>
                     </div>
-
-
                 </div>
             </div>
         </main>
@@ -123,6 +133,24 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
 
     <!-- Template Main JS File -->
     <script src="../Assets/js/main.js"></script>
+
+    <script>
+        document.getElementById('increaseButton').addEventListener('click', function() {
+            var quantityInput = document.getElementById('productQuantity');
+            var currentValue = parseInt(quantityInput.value, 10);
+            if (!isNaN(currentValue)) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
+
+        document.getElementById('decreaseButton').addEventListener('click', function() {
+            var quantityInput = document.getElementById('productQuantity');
+            var currentValue = parseInt(quantityInput.value, 10);
+            if (!isNaN(currentValue) && currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -87,7 +87,6 @@ $users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
                 </div>
             </form>
             <br><br>
-            <!-- <hr> -->
         </main>
     </div>
     </div>
