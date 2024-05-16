@@ -14,6 +14,7 @@ function register($username, $password, $confirmPassword)
     if (mysqli_fetch_assoc($sameUsername)) {
         echo "<script>
                     alert('Username has been registered')
+                    window.location.href = '../../../../Client/Log/Register/'
                 </script>";
         return false;
     }
@@ -21,6 +22,8 @@ function register($username, $password, $confirmPassword)
     if ($confirmPassword !== $password) {
         echo "<script>
                     alert('Password doesnot same')
+                    window.location.href = '../../../../Client/Log/Register/'
+
                 </script>";
         return false;
     }
@@ -37,10 +40,12 @@ function register($username, $password, $confirmPassword)
     if ($result) {
         echo "<script>
                     alert('Registration Success')
+                    window.location.href = '../../../../Client/Log/Login/'
                 </script>";
     } else {
         echo "<script>
                     alert('Registration Failed')
+                    window.location.href = '../../../../Client/Log/Register/'
                 </script>";
     }
 }

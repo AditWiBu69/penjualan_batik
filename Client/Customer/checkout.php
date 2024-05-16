@@ -1,3 +1,12 @@
+<?php
+session_start();
+require '../../Server/Config/Read/productRead.php';
+$id = $_GET['id'];
+$id_user = $_SESSION['id_user'];
+
+$products = query("SELECT product_name,price FROM products WHERE id_product = $id")[0];
+$users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,24 +51,27 @@
     <br><br><br>
     <div id="layoutSidenav_content">
         <main>
-            <form action="" class="row g-3">
+            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
                 <div class="container-fluid px-5">
                     <h2 class="mt-3 text-center"><i class="fa-solid fa-bag-shopping"></i> Checkout</h2>
                     <hr>
                     <div class="row w-100 d-flex justify-content-center align-items-center" style="padding-left: 2em;">
+                        `
+                        <p>Silahkan transfer pada rekening berikut : 922498xxxx a.n Adit</p>
 
-                        <p>Silahkan transfer pada rekening berikut : 922498xxxx a.n Adit </p>
+                        <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                        <input type="hidden" name="id_product" value="<?= $id ?>">
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Product Name</label>
-                            <input type="text" name="name" class="form-control" id="name">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" name="product_name" class="form-control" id="product_name" value="<?= $products['product_name']; ?>" disabled>
                         </div>
                         <div class="col-md-6">
-                            <label for="no_telp" class="form-label">Nomor Rekening</label>
-                            <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No rekening">
+                            <label for="no_rek" class="form-label">Nomor Rekening</label>
+                            <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No rekening">
                         </div>
                         <div class="col-md-6">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="name">
+                            <input type="text" name="name" class="form-control" id="name" value="<?= $users['name']; ?>" disabled>
                         </div>
 
                         <div class="col-md-6">
@@ -71,13 +83,15 @@
                             <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
                             <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
                         </div>
+                    </div>
+                </div>
             </form>
             <br><br>
             <!-- <hr> -->
         </main>
     </div>
-</div>
-</div>
+    </div>
+    </div>
 
 
 

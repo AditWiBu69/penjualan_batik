@@ -1,23 +1,6 @@
-<?php
+<?php 
 session_start();
-
-require '../../Server/Config/Read/productRead.php';
-
-$id_user = $_SESSION['id_user'];
-
-// Menjalankan query dan menghindari error jika hasil query kosong
-$profile = query("SELECT a.*, b.username FROM biodata a INNER JOIN users b ON a.user_id = b.id WHERE a.user_id = $id_user");
-
-// Menambahkan pengecekan apakah hasil query kosong
-if (!empty($profile)) {
-    $profile = $profile[0];
-} else {
-    $profile = null; // atau bisa juga gunakan array kosong $profile = [];
-}
-$products = query('SELECT id_product,product_name,description,photo FROM products');
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,43 +46,38 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-5">
-                <h2 class="mt-3 text-center"><i class="fa-solid fa-list"></i> Daftar Products</h2>
+                <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i> Profile</h2>
                 <hr>
-                <br>
-                <!-- <button type="button" class="btn btn-success" onclick="window.location.href = 'tambah.php';">Add Data</button> -->
-
-                <div class="card p-4">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <?php foreach ($products as $product) : ?>
-                            <div class="col-md-3 mb-3">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="../Assets/img/product/<?= $product['photo']; ?>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h4 class="card-text"><?= $product['product_name']; ?></h4>
-                                        <b class="card-text">Description:</b>
-                                        <p><?= $product['description']; ?></p>
-
-                                        <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-forward"></i></a>
-
-                                        <?php if (empty($profile)) : ?>
-                                            <a href="#" class="ms-3 btn btn-success btn-sm" onclick="return alert('Fill in your bio first')">Buy <i class="fa-solid fa-cart-shopping"></i></a>
-                                        <?php else : ?>
-                                            <a href="checkout.php?id=<?= $product['id_product']; ?>" class="ms-3 btn btn-success btn-sm">Buy <i class="fa-solid fa-cart-shopping"></i></a>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                <form action="../../Server/Config/Create/profileCreate.php" method="post">
+                    <input type="hidden" name="id_user" value="<?= $_SESSION['id_user']; ?>">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                     </div>
 
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                    </div>
 
-                </div>
-            </div>
+                    <div class="mb-3">
+                        <label for="no_telp" class="form-label">No Telp</label>
+                        <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Telp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="address"></textarea>
+                    </div>
+                    <hr>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href = 'customer.php';"><i class="fa-solid fa-backward"></i> Back</button>
+                    <button type="submit" class="btn btn-success"> Submit</button>
+                </form>
         </main>
     </div>
-    </main>
 
     </div>
+
+
 
 
 

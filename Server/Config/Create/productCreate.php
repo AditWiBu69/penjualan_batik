@@ -73,6 +73,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    // Memanggil fungsi register
     addProduct($category, $product_name, $size, $stock, $price,$description);
 }

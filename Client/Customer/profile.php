@@ -1,3 +1,11 @@
+<?php
+session_start();
+require '../../Server/Config/Read/productRead.php';
+$id_user = $_SESSION['id_user'];
+
+$profile = query("SELECT a.*,b.username FROM biodata a INNER JOIN users b ON a.user_id=b.id WHERE a.user_id = $id_user")[0];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,30 +51,39 @@
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid px-5">
-        <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i>  Profile</h2>
+        <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i> Profile</h2>
         <hr>
 
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+          <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['name']; ?>" placeholder="Name">
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Username</label>
+          <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['username']; ?>" placeholder="Name">
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" name="name" class="form-control" id="email" placeholder="Email">
+          <input type="email" name="name" class="form-control" id="email" disabled value="<?= $profile['email']; ?>" placeholder="Email">
         </div>
 
         <div class="mb-3">
           <label for="no_telp" class="form-label">No Telp</label>
-          <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Telp">
+          <input type="text" name="no_telp" class="form-control" id="no_telp" disabled value="<?= $profile['no_telp']; ?>" placeholder="No Telp">
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>"<?= $profile['address']; ?>"</textarea>
         </div>
         <hr>
         <button type="button" class="btn btn-secondary" onclick="window.location.href = 'customer.php';"><i class="fa-solid fa-backward"></i> Back</button>
-        <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
+
+        <?php if (empty($profile)) : ?>
+          <button type="button" class="btn btn-success" onclick="window.location.href = 'add-profile.php';"> Add Profile</button>
+        <?php else : ?>
+          <a href="" class="btn btn-warning">Edit</a>
+        <?php endif; ?>
     </main>
   </div>
 
