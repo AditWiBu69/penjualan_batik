@@ -11,7 +11,7 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Gallery</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           
           <li><button class="getstarted scrollto" onclick="window.location.href = 'Log/Login/index.php';">Sign In</button></li>
         </ul>
