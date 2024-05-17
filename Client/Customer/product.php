@@ -83,7 +83,7 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="decreaseButton">-</button>
                                             </div>
-                                            <input type="text" class="form-control text-center thick-border" id="productQuantity" value="1" readonly>
+                                            <input type="text" class="form-control text-center thick-border" id="productQuantity" value="1">
                                             <div class="input-group-append">
                                                 <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="increaseButton">+</button>
                                             </div>
