@@ -61,7 +61,7 @@ $profile = query("SELECT a.*,b.username FROM biodata a INNER JOIN users b ON a.u
           </div>
           <div class="mb-3">
             <label for="name" class="form-label">Username</label>
-            <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['username']; ?>" placeholder="Name">
+            <input type="text" name="name" class="form-control" id="name" disabled value="<?= $_SESSION['user']; ?>" placeholder="Name">
           </div>
 
           <div class="mb-3">
