@@ -3,7 +3,13 @@ session_start();
 require '../../Server/Config/Read/productRead.php';
 $id_user = $_SESSION['id_user'];
 
-$profile = query("SELECT a.*,b.username FROM biodata a INNER JOIN users b ON a.user_id=b.id WHERE a.user_id = $id_user")[0];
+$profile = query("SELECT a.*,b.username FROM biodata a INNER JOIN users b ON a.user_id=b.id WHERE a.user_id = $id_user");
+
+if (!empty($profile)) {
+  $profile = $profile[0];
+} else {
+  $profile = null; 
+}
 
 ?>
 <!DOCTYPE html>
