@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 12, 2024 at 07:28 AM
+-- Generation Time: May 18, 2024 at 03:16 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -72,6 +72,13 @@ CREATE TABLE `products` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id_product`, `category_id`, `product_name`, `size`, `stock`, `price`, `photo`, `description`) VALUES
+(3, 1, 'Baju Batik', 'XL', 1, 200000, '6640992b3a367.jpg', 'Lorem');
+
 -- --------------------------------------------------------
 
 --
@@ -83,8 +90,11 @@ CREATE TABLE `transactions` (
   `user_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  `status` varchar(100) DEFAULT NULL
+  `total` varchar(255) DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `status` enum('Success','Pending','Failed') DEFAULT NULL,
+  `rekening_number` int(11) NOT NULL,
+  `transfer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -153,7 +163,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `biodata`
 --
 ALTER TABLE `biodata`
-  MODIFY `id_biodata` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_biodata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -165,19 +175,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id_transaction` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
