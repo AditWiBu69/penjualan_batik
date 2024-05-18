@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +48,7 @@
             </div>
             <div class="col-lg-6 d-flex flex-column justify-content-center">
               <h1 data-aos="fade-up">Welcome to BatikKu.</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">Aditya Firmansyah</h2>
+              <h2 data-aos="fade-up" data-aos-delay="400"><?= $_SESSION['user']; ?></h2>
               <div data-aos="fade-up" data-aos-delay="600">
                 <div class="text-center text-lg-start">
                   
