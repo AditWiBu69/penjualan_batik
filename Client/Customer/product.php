@@ -14,7 +14,7 @@ if (!empty($profile)) {
 } else {
     $profile = null; // atau bisa juga gunakan array kosong $profile = [];
 }
-$products = query('SELECT id_product,product_name,description,photo FROM products');
+$products = query('SELECT * FROM products');
 
 ?>
 
@@ -74,21 +74,19 @@ $products = query('SELECT id_product,product_name,description,photo FROM product
                                     <img src="../Assets/img/product/<?= $product['photo']; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h4 class="card-text"><?= $product['product_name']; ?></h4>
+                                        <b class="card-text">Price</b>
+                                        <p>
+                                            <?php
+                                            $price = $product['price'];
+                                            $formatted_price = number_format($price, 2, ',', '.');
+                                            ?>
+                                            <?="Rp. ". $formatted_price; ?>
+                                        </p>
+                                        <b class="card-text">Stock:</b>
+                                        <p><?= $product['stock']; ?></p>
+
                                         <b class="card-text">Description:</b>
                                         <p><?= $product['description']; ?></p>
-
-
-                                        <!-- set jumlah -->
-                                        <div class="input-group" style="width: 100px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="decreaseButton">-</button>
-                                            </div>
-                                            <input type="text" class="form-control text-center thick-border" id="productQuantity" value="1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary btn-outline-dark text-white" type="button" id="increaseButton">+</button>
-                                            </div>
-                                        </div>
-                                        <!-- set jumlah end  -->
 
                                         <br>
                                         <a href="detail-product.php?id=<?= $product['id_product']; ?>" class="btn btn-primary btn-sm">Details <i class="fa-solid fa-eye"></i></a>

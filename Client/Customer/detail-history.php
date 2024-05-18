@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+require '../../Server/Config/Read/productRead.php';
+
+$id = $_GET['id'];
+
+$query = query("SELECT a.*, b.*,c.* FROM transactions a INNER JOIN products b ON a.product_id = b.id_product INNER JOIN categories c ON b.category_id=c.id_category WHERE b.id_product = $id")[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,39 +58,52 @@
                 <div class="card">
                     <br>
                     <div class="card-body" style="padding-left: 2em;">
-                        <img src="../Assets/img/portfolio/portfolio-3.jpg" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
-                        <h4><b class="card-title col-md-6">Nama Product</b></h4>
-                        
+                        <img src="../Assets/img/product/<?= $query['photo']; ?>" class="rounded mx-auto d-block" width="35%" height="35%" alt="...">
+                        <h4><b class="card-title col-md-6"><?= $query['product_name']; ?></b></h4>
+
                         <table>
                             <tr>
                                 <td> Description</td>
                                 <td> : </td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, nesciunt!</td>
+                                <td><?= $query['description']; ?></td>
                             </tr>
                             <tr>
                                 <td>Size</td>
                                 <td>:</td>
-                                <td>22</td>
+                                <td><?= $query['size']; ?></td>
                             </tr>
                             <tr>
                                 <td>Category</td>
                                 <td>:</td>
-                                <td>Baju dinas malam</td>
+                                <td><?= $query['category']; ?></td>
                             </tr>
                             <tr>
                                 <td>Price</td>
                                 <td>:</td>
-                                <td>Rp. 100.000</td>
+                                <td>
+                                    <?php
+                                    $price = $query['price'];
+                                    $formatted_price = number_format($price, 2, ',', '.');
+                                    ?>
+                                    <?= "Rp. " . $formatted_price; ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Qty</td>
                                 <td>:</td>
-                                <td>2</td>
+                                <td><?= $query['quantity']; ?></td>
                             </tr>
                             <tr>
                                 <td>Amount</td>
                                 <td>:</td>
-                                <td>Rp. 200.000</td>
+                                <td><?= $query['total']; ?></td>
+
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>:</td>
+                                <td><?= $query['status']; ?></td>
+
                             </tr>
 
                         </table>

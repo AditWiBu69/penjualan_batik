@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require '../../Server/Config/Read/productRead.php';
+
+$transactions = query('SELECT a.*, b.* FROM transactions a INNER JOIN products b ON a.product_id = b.id_product');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,25 +54,38 @@
 
                 <h2 class="mt-3 text-center"><i class="fa-solid fa-circle-info"></i> Details Order History</h2>
                 <hr>
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="../Assets/img/portfolio/portfolio-2.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Nama Product</h5>
-                                <b>Description:</b>
-                                <p class="card-text text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, aliquid.</p>
-                                <p class="card-text"><small class="text-muted">13 June 2024</small></p>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = 'detail-history.php';"><i class="fa-solid fa-eye"></i> Details</button>
+                <div class="row">
+                    <?php foreach ($transactions as $transaction) : ?>
+                        <div class="col-md-6">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../Assets/img/product/<?= $transaction['photo']; ?>" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $transaction['product_name']; ?></h5>
+                                            <b>Total</b>
+                                            <p class="card-text text-justify">
+                                                <?= $transaction['total']; ?>
+                                            </p>
+                                            <?php
+                                            $date = $transaction['date']; // format dari database: YYYY-MM-DD
+                                            $formatted_date = date("d-m-Y", strtotime($date));
+                                            ?>
+                                            <p class="card-text"><small class="text-muted"><?= $formatted_date; ?></small></p>
+
+                                            <a href="detail-history.php?id=<?= $transaction['id_product']; ?>" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-    </div>
-    </main>
+
+        </main>
 
     </div>
 

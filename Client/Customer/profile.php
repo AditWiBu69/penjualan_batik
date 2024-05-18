@@ -54,28 +54,53 @@ $profile = query("SELECT a.*,b.username FROM biodata a INNER JOIN users b ON a.u
         <h2 class="mt-3 text-center"><i class="fa-solid fa-user"></i> Profile</h2>
         <hr>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['name']; ?>" placeholder="Name">
-        </div>
-        <div class="mb-3">
-          <label for="name" class="form-label">Username</label>
-          <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['username']; ?>" placeholder="Name">
-        </div>
+        <?php if (empty($profile)) : ?>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name" disabled value="Fill biodata first" placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Username</label>
+            <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['username']; ?>" placeholder="Name">
+          </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" name="name" class="form-control" id="email" disabled value="<?= $profile['email']; ?>" placeholder="Email">
-        </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="name" class="form-control" id="email" disabled value="Fill biodata first" placeholder="Email">
+          </div>
 
-        <div class="mb-3">
-          <label for="no_telp" class="form-label">No Telp</label>
-          <input type="text" name="no_telp" class="form-control" id="no_telp" disabled value="<?= $profile['no_telp']; ?>" placeholder="No Telp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>"<?= $profile['address']; ?>"</textarea>
-        </div>
+          <div class="mb-3">
+            <label for="no_telp" class="form-label">No Telp</label>
+            <input type="text" name="no_telp" class="form-control" id="no_telp" disabled value="Fill biodata first" placeholder="No Telp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>"Fill the biodata</textarea>
+          </div>
+        <?php else : ?>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['name']; ?>" placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Username</label>
+            <input type="text" name="name" class="form-control" id="name" disabled value="<?= $profile['username']; ?>" placeholder="Name">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="name" class="form-control" id="email" disabled value="<?= $profile['email']; ?>" placeholder="Email">
+          </div>
+
+          <div class="mb-3">
+            <label for="no_telp" class="form-label">No Telp</label>
+            <input type="text" name="no_telp" class="form-control" id="no_telp" disabled value="<?= $profile['no_telp']; ?>" placeholder="No Telp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>"<?= $profile['address']; ?>"</textarea>
+          </div>
+        <?php endif; ?>
         <hr>
         <button type="button" class="btn btn-secondary" onclick="window.location.href = 'customer.php';"><i class="fa-solid fa-backward"></i> Back</button>
 

@@ -51,37 +51,61 @@ $users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
     <br><br><br>
     <div id="layoutSidenav_content">
         <main>
-            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+            <form action="../../Server/Config/Create/checkoutCreate.php" class="row g-3" method="post" enctype="multipart/form-data">
                 <div class="container-fluid px-5">
                     <h2 class="mt-3 text-center"><i class="fa-solid fa-bag-shopping"></i> Checkout</h2>
                     <hr>
-                    <div class="row w-100 d-flex justify-content-center align-items-center" style="padding-left: 2em;">
+                    <div class="row w-100 d-flex align-items-center" style="padding-left: 2em;">
                         `
                         <p>Silahkan transfer pada rekening berikut : 922498xxxx a.n Adit</p>
 
                         <input type="hidden" name="id_user" value="<?= $id_user ?>">
                         <input type="hidden" name="id_product" value="<?= $id ?>">
-                        <div class="col-md-6">
-                            <label for="product_name" class="form-label">Product Name</label>
-                            <input type="text" name="product_name" class="form-control" id="product_name" value="<?= $products['product_name']; ?>" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="no_rek" class="form-label">Nomor Rekening</label>
-                            <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No rekening">
-                        </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-6 mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" name="name" class="form-control" id="name" value="<?= $users['name']; ?>" disabled>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" name="product_name" class="form-control" id="product_name" value="<?= $products['product_name']; ?>" disabled>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <?php
+                            $price = $products['price'];
+                            $formatted_price = number_format($price, 2, ',', '.');
+                            ?>
+                            <input type="text" name="price" class="form-control" id="price" value="<?="Rp " .  $formatted_price; ?>" disabled>
+                            <input type="hidden" id="priceValue" value="<?= $price; ?>">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="qty" class="form-label">Quantity</label>
+                            <input type="text" name="qty" class="form-control" id="qty" placeholder="Enter quantity">
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="total" class="form-label">Total</label>
+                            <input type="text" name="total" class="form-control" id="total" value="Rp 0,00" readonly>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="no_rek" class="form-label">Nomor Rekening</label>
+                            <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No rekening">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
                             <label for="formFile" class="form-label">Bukti Pembayaran</label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="photo">
                         </div>
                         <div class="">
                             <br>
                             <button type="button" class="btn btn-secondary" onclick="window.location.href = 'product.php';"><i class="fa-solid fa-backward"></i> Back</button>
-                            <button type="button" class="btn btn-success" onclick="window.location.href = '#';"> Submit</button>
+                            <button type="submit" class="btn btn-success"> Submit</button>
                         </div>
                     </div>
                 </div>
@@ -89,11 +113,22 @@ $users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
             <br><br>
         </main>
     </div>
-    </div>
-    </div>
 
 
 
+    <script>
+        document.getElementById('qty').addEventListener('input', function() {
+            var price = parseFloat(document.getElementById('priceValue').value);
+            var quantity = parseInt(this.value);
+            if (!isNaN(quantity) && quantity > 0) {
+                var total = price * quantity;
+                var formattedTotal = "Rp " + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace('.', ',');
+                document.getElementById('total').value = formattedTotal;
+            } else {
+                document.getElementById('total').value = "Rp 0,00";
+            }
+        });
+    </script>
 
 
 
