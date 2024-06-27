@@ -2,13 +2,37 @@
 session_start();
 require '../../../Server/Config/Read/productRead.php';
 
-$transactions = query('SELECT a.*, b.*, c.*, d.* 
-FROM transactions a 
-INNER JOIN products b ON a.product_id = b.id_product 
-INNER JOIN users c ON a.user_id = c.id 
-INNER JOIN biodata d ON c.id = d.user_id
-');
+// Default query untuk mengambil semua transaksi
+$query = 'SELECT a.*, b.*, c.*, d.* 
+          FROM transactions a 
+          INNER JOIN products b ON a.product_id = b.id_product 
+          INNER JOIN users c ON a.user_id = c.id 
+          INNER JOIN biodata d ON c.id = d.user_id';
+
+// Tambahkan kondisi berdasarkan filter jika ada
+$conditions = [];
+$selectedMonth = isset($_GET['selected_month']) ? $_GET['selected_month'] : date('m');
+$selectedYear = isset($_GET['selected_year']) ? $_GET['selected_year'] : date('Y');
+$selectedStatus = isset($_GET['selected_status']) ? $_GET['selected_status'] : '';
+
+if ($selectedMonth) {
+    $conditions[] = "MONTH(a.date) = '$selectedMonth'";
+}
+if ($selectedYear) {
+    $conditions[] = "YEAR(a.date) = '$selectedYear'";
+}
+if ($selectedStatus) {
+    $conditions[] = "a.status = '$selectedStatus'";
+}
+
+// Tambahkan kondisi ke query jika ada
+if (count($conditions) > 0) {
+    $query .= ' WHERE ' . implode(' AND ', $conditions);
+}
+
+$transactions = query($query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,8 +66,47 @@ INNER JOIN biodata d ON c.id = d.user_id
                         <li class="breadcrumb-item"><a href="../admin.php">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data</li>
                     </ol>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <form method="get" class="col-sm-6 d-flex flex-row-reverse w-100">
+                                <button type="submit" class="btn btn-success ms-2">Filter</button>
+                                <select name="selected_status" class="form-select" style="width: 150px;">
+                                    <option value="">All Status</option>
+                                    <option value="Pending" <?= ($selectedStatus == 'Pending') ? 'selected' : ''; ?>>Pending</option>
+                                    <option value="Success" <?= ($selectedStatus == 'Success') ? 'selected' : ''; ?>>Success</option>
+                                    <option value="Failed" <?= ($selectedStatus == 'Failed') ? 'selected' : ''; ?>>Failed</option>
+                                </select>
+                                <select name="selected_month" class="form-select" style="width: 210px;">
+                                    <?php
+                                    $selectedMonth = isset($_GET['selected_month']) ? $_GET['selected_month'] : date('m');
+                                    $months = [
+                                        "01" => "January", "02" => "February", "03" => "March", "04" => "April",
+                                        "05" => "May", "06" => "June", "07" => "July", "08" => "August",
+                                        "09" => "September", "10" => "October", "11" => "November", "12" => "December"
+                                    ];
 
+                                    foreach ($months as $monthNumber => $monthName) {
+                                        $selected = ($selectedMonth == $monthNumber) ? "selected" : "";
+                                        echo "<option value='$monthNumber' $selected>$monthName</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <select name="selected_year" class="form-select" style="width: 100px;">
+                                    <?php
+                                    $selectedYear = isset($_GET['selected_year']) ? $_GET['selected_year'] : date('Y');
+                                    $startYear = 2022;
+                                    $endYear = 2030;
 
+                                    for ($year = $startYear; $year <= $endYear; $year++) {
+                                        $selected = ($selectedYear == $year) ? "selected" : "";
+                                        echo "<option value='$year' $selected>$year</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </form>
+                        </div>
+
+                    </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
@@ -65,45 +128,45 @@ INNER JOIN biodata d ON c.id = d.user_id
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 1 ?>
-                                    <?php foreach ($transactions as $transaction) : ?>
-                                        <tr>
-                                            <td><?= $i; ?></td>
-                                            <td> <?= $transaction['name']; ?></td>
-                                            <td> <?= $transaction['id_transaction']; ?></td>
-                                            <?php
-                                            $date = $transaction['date']; // format dari database: YYYY-MM-DD
-                                            $formatted_date = date("d-m-Y", strtotime($date));
-                                            ?>
-                                            <td> <?= $formatted_date; ?></td>
-                                            <td> <?= $transaction['quantity']; ?></td>
-                                            
-
-                                            <td> <?= $transaction['total']; ?></td>
-                                            <td> <?= $transaction['rekening_number']; ?></td>
-                                            <td>
-                                                <a href="#" class="text-center open-popup-link" data-id="<?= $transaction['id_transaction']; ?>" data-file="<?= $transaction['transfer']; ?>">
-                                                    <i class="fa-solid fa-image"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="../../../Server/Config/Update/updateStatus.php" method="POST" class="d-flex gx-4">
-                                                    <select class="form-select form-select-sm" name="new_status">
-                                                        <option value="Pending" <?= ($transaction['status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
-                                                        <option value="Success" <?= ($transaction['status'] == 'Success') ? 'selected' : ''; ?>>Success</option>
-                                                        <option value="Failed" <?= ($transaction['status'] == 'Failed') ? 'selected' : ''; ?>>Failed</option>
-                                                    </select>
-                                                    <input type="hidden" name="id_transaction" value="<?= $transaction['id_transaction']; ?>">
-                                                    <button type="submit" class="btn btn-primary btn-sm">
-                                                        <i class="fa-solid fa-pen-square"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <?php $i++ ?>
-                                    <?php endforeach; ?>
-
+                                    <?php if (!empty($transactions)) : ?>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($transactions as $transaction) : ?>
+                                            <tr>
+                                                <td><?= $i; ?></td>
+                                                <td><?= $transaction['name']; ?></td>
+                                                <td><?= $transaction['id_transaction']; ?></td>
+                                                <?php
+                                                $date = $transaction['date']; // format dari database: YYYY-MM-DD
+                                                $formatted_date = date("d-m-Y", strtotime($date));
+                                                ?>
+                                                <td><?= $formatted_date; ?></td>
+                                                <td><?= $transaction['quantity']; ?></td>
+                                                <td><?= $transaction['total']; ?></td>
+                                                <td><?= $transaction['rekening_number']; ?></td>
+                                                <td>
+                                                    <a href="#" class="text-center open-popup-link" data-id="<?= $transaction['id_transaction']; ?>" data-file="<?= $transaction['transfer']; ?>">
+                                                        <i class="fa-solid fa-image"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="../../../Server/Config/Update/updateStatus.php" method="POST" class="d-flex gx-4">
+                                                        <select class="form-select form-select-sm" name="new_status">
+                                                            <option value="Pending" <?= ($transaction['status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
+                                                            <option value="Success" <?= ($transaction['status'] == 'Success') ? 'selected' : ''; ?>>Success</option>
+                                                            <option value="Failed" <?= ($transaction['status'] == 'Failed') ? 'selected' : ''; ?>>Failed</option>
+                                                        </select>
+                                                        <input type="hidden" name="id_transaction" value="<?= $transaction['id_transaction']; ?>">
+                                                        <button type="submit" class="btn btn-primary btn-sm">
+                                                            <i class="fa-solid fa-pen-square"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <?php $i++; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -122,13 +185,13 @@ INNER JOIN biodata d ON c.id = d.user_id
             });
         });
     </script>
+
     <script src="../../Assets/js/table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
 </body>
