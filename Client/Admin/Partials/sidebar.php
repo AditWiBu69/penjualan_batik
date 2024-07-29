@@ -25,7 +25,7 @@
 
                     <div class="sb-sidenav-menu-heading">Transaction Table</div>
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="../../../../penjualan_batik/Client/Admin/DataReport/report.php">Data Report</a>
+                        <a class="nav-link" href="../../../../penjualan_batik/Client/Admin/DataReport/report.php">Data Pembeli</a>
                     </nav>
 
                 </div>

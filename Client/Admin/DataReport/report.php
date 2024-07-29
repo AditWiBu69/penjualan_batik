@@ -61,7 +61,7 @@ $transactions = query($query);
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Data Report</h1>
+                    <h1 class="mt-4">Data Pembeli</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../admin.php">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data</li>
@@ -110,7 +110,7 @@ $transactions = query($query);
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Data Report
+                            Data Pembeli
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
