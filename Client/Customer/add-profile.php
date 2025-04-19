@@ -62,7 +62,7 @@ session_start();
 
                     <div class="mb-3">
                         <label for="no_telp" class="form-label">No Telp</label>
-                        <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Telp">
+                        <input type="number" name="no_telp" class="form-control" id="no_telp" placeholder="No Telp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Address</label>

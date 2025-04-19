@@ -84,7 +84,7 @@ $users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
 
                         <div class="col-md-6 mb-3">
                             <label for="qty" class="form-label">Quantity</label>
-                            <input type="text" name="qty" class="form-control" id="qty" placeholder="Enter quantity">
+                            <input type="number" name="qty" class="form-control" id="qty" placeholder="Enter quantity">
                         </div>
 
 
@@ -95,7 +95,17 @@ $users = query("SELECT name FROM biodata WHERE user_id = $id_user")[0];
 
                         <div class="col-md-6 mb-3">
                             <label for="no_rek" class="form-label">Nomor Rekening</label>
-                            <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No rekening">
+                            <input type="number" name="no_rek" class="form-control" id="no_rek" placeholder="No rekening">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                        <label for="size">Pilih Ukuran:</label>
+                        <select id="size" name="size">
+                        <option value="small">S</option>
+                        <option value="medium">M</option>
+                        <option value="large">L</option>
+                        <option value="extra-large">XL</option>
+                        </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
